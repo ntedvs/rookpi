@@ -1,4 +1,4 @@
-import { Chess, Piece as P } from "chess.js"
+import { Chess, Square } from "chess.js"
 
 const size = 80
 const white = "#f0d9b5"
@@ -13,34 +13,33 @@ export default function App() {
 
       {Array.from({ length: 8 }).map((_, i) => (
         <div key={i} style={{ display: "flex" }}>
-          {Array.from({ length: 8 }).map((_, j) => (
-            <div
-              key={j}
-              style={{
-                width: size,
-                height: size,
-                backgroundColor: (i + j) % 2 === 0 ? white : black,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Piece piece={chess.get("a1")} />
-            </div>
-          ))}
+          {Array.from({ length: 8 }).map((_, j) => {
+            const square = String.fromCharCode(97 + j) + (8 - i)
+            const piece = chess.get(square as Square)
+
+            return (
+              <div
+                key={j}
+                style={{
+                  width: size,
+                  height: size,
+                  backgroundColor: (i + j) % 2 === 0 ? white : black,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {piece && (
+                  <img
+                    src={`pieces/${piece.color}${piece.type}.svg`}
+                    style={{ width: size, height: size }}
+                  />
+                )}
+              </div>
+            )
+          })}
         </div>
       ))}
     </>
-  )
-}
-
-function Piece({ piece }: { piece?: P }) {
-  if (!piece) return null
-
-  return (
-    <img
-      src={`pieces/${piece.color}${piece.type}.svg`}
-      style={{ width: "100%", height: "100%" }}
-    />
   )
 }
