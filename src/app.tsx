@@ -1,3 +1,4 @@
+import { invoke } from "@tauri-apps/api/core"
 import { Chess, Square } from "chess.js"
 
 const size = 80
@@ -6,6 +7,12 @@ const black = "#b58863"
 
 export default function App() {
   const chess = new Chess()
+
+  const x = async () => {
+    console.log(await invoke("greet", { name: "Nate" }))
+  }
+
+  x()
 
   return (
     <>
