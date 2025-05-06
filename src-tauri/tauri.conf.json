@@ -1,5 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Rookpi",
   "identifier": "com.rookpi.app",
   "build": {
     "beforeDevCommand": "pnpm dev",
@@ -8,7 +9,9 @@
   "app": {
     "windows": [
       {
-        "title": "Rookpi"
+        "title": "Rookpi",
+        "width": 800,
+        "height": 800
       }
     ]
   }
